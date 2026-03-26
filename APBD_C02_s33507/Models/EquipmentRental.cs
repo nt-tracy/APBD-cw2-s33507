@@ -1,14 +1,25 @@
 ﻿namespace APBD_C02_s33507.Models;
 
-public class EquipmentRental(Equipment equipment, User user, DateTime from, DateTime to, bool returned)
+public class EquipmentRental
 {
-    private static int _nextId = 1;
-    public int  Id { get; set; } =  ++_nextId;
-    
+    private static int _nextId = 0;
+    public int Id { get; } = ++_nextId;
+
     public Equipment Equipment { get; set; }
     public User User { get; set; }
-    public DateTime From { get; set; }
-    public DateTime To { get; set; }
-    public bool ReturnedStatus { get; set; }
     
+    public DateTime RentDate { get; set; }     // Kiedy wypożyczono 
+    public DateTime DueDate { get; set; }      // Termin zwrotu 
+    public DateTime? ActualReturnDate { get; set; } // Faktyczny zwrot 
+    public bool IsReturned { get; set; }       // Czy zwrócono 
+
+    // Konstruktor dopasowany do logiki CreateRental
+    public EquipmentRental(User user, Equipment equipment, DateTime rentDate, DateTime dueDate)
+    {
+        User = user;
+        Equipment = equipment;
+        RentDate = rentDate;
+        DueDate = dueDate;
+        IsReturned = false;
+    }
 }

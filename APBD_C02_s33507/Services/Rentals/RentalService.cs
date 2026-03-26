@@ -30,22 +30,16 @@ public class RentalService : IRentalService
         equipment.Status = AvailabilityStatus.notAvailable;
     }
 
-    public void CancelRental(int rentalId)
+    public decimal ReturnEquipment(int rentalId)
     {
         var rental = _rentals.FirstOrDefault(r => r.Id == rentalId) 
-                     ?? throw new Exception("Nie znaleziono wypożyczenia.");
-
-        if (rental.IsReturned) return;
-
-        rental.DueDate = DateTime.Now;
+                     ?? throw new RentalNotFoundException();
+        
+        rental.ActualReturnDate = DateTime.Now;
         rental.IsReturned = true;
-        rental.Equipment.Status = AvailabilityStatus.available;
+        rental.Equipment.Status = AvailabilityStatus.available; // Przywracamy dostępność [cite: 14, 37]
 
-        decimal penalty = CalculatePenalty(rental);
-        if (penalty > 0)
-        {
-            Console.WriteLine($"Naliczono karę za opóźnienie: {penalty} zł.");
-        }
+        return CalculatePenalty(rental);
     }
 
     private decimal CalculatePenalty(EquipmentRental rental)

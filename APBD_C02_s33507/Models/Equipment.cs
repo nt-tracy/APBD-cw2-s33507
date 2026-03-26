@@ -3,7 +3,7 @@
 namespace APBD_C02_s33507.Models;
 using APBD_C02_s33507.Enums;
 
-public abstract class EquipmentType(string name, AvailabilityStatus status, string SerialNumber, string Producent )
+public abstract class Equipment(string name, AvailabilityStatus status, string SerialNumber, string Producent )
 {
     public static int _nextId = 1;
     

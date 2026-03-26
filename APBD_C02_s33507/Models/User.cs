@@ -8,5 +8,6 @@ public abstract class User(string fName, string lName)
     public string FName { get; set; } = fName;
     public string LName { get; set; } = lName;
     public abstract string GetUserType();
+    public abstract int MaxRentals();
 
 }

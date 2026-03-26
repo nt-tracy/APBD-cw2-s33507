@@ -9,7 +9,6 @@ public class EquipmentRental(Equipment equipment, User user, DateTime from, Date
     public User User { get; set; }
     public DateTime From { get; set; }
     public DateTime To { get; set; }
-    public bool Returned { get; set; } = false;
-    
+    public bool ReturnedStatus { get; set; }
     
 }
